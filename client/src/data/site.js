@@ -80,13 +80,13 @@ export const advantages = [
 ];
 
 export const curriculum = [
-  { phase: '01', weeks: 'Weeks 1–3', title: 'Design Foundations', points: ['Colour, typography & layout', 'Photoshop essentials', 'Composition & visual hierarchy'] },
-  { phase: '02', weeks: 'Weeks 4–6', title: 'Branding & Illustration', points: ['Logo & identity design in Illustrator', 'Brand guidelines', 'Posters, packaging & print'] },
-  { phase: '03', weeks: 'Weeks 7–9', title: 'Social Media Creatives', points: ['Ad creatives & carousels', 'Thumbnails that get clicks', 'Designing for every platform'] },
-  { phase: '04', weeks: 'Weeks 10–12', title: 'Video Editing', points: ['Premiere Pro workflow', 'Storytelling, pacing & hooks', 'Reels, shorts & long-form'] },
-  { phase: '05', weeks: 'Weeks 13–15', title: 'Motion Graphics', points: ['After Effects animation', 'Kinetic typography', 'Logo animations & templates'] },
-  { phase: '06', weeks: 'Weeks 16–18', title: 'Colour, Sound & Business', points: ['Colour grading in DaVinci Resolve', 'Sound design & mixing', 'Pricing, proposals & clients'] },
-  { phase: '07', weeks: 'Weeks 19–21', title: 'Portfolio & Placements', points: ['Portfolio & showreel', 'Mock interviews & reviews', 'Placement drives & referrals'] },
+  { phase: '01', image: '/phases/p1.jpg', weeks: 'Weeks 1–3', title: 'Design Foundations', points: ['Colour, typography & layout', 'Photoshop essentials', 'Composition & visual hierarchy'] },
+  { phase: '02', image: '/phases/p2.jpg', weeks: 'Weeks 4–6', title: 'Branding & Illustration', points: ['Logo & identity design in Illustrator', 'Brand guidelines', 'Posters, packaging & print'] },
+  { phase: '03', image: '/phases/p3.jpg', weeks: 'Weeks 7–9', title: 'Social Media Creatives', points: ['Ad creatives & carousels', 'Thumbnails that get clicks', 'Designing for every platform'] },
+  { phase: '04', image: '/phases/p4.jpg', weeks: 'Weeks 10–12', title: 'Video Editing', points: ['Premiere Pro workflow', 'Storytelling, pacing & hooks', 'Reels, shorts & long-form'] },
+  { phase: '05', image: '/phases/p5.jpg', weeks: 'Weeks 13–15', title: 'Motion Graphics', points: ['After Effects animation', 'Kinetic typography', 'Logo animations & templates'] },
+  { phase: '06', image: '/phases/p6.jpg', weeks: 'Weeks 16–18', title: 'Colour, Sound & Business', points: ['Colour grading in DaVinci Resolve', 'Sound design & mixing', 'Pricing, proposals & clients'] },
+  { phase: '07', image: '/phases/p7.jpg', weeks: 'Weeks 19–21', title: 'Portfolio & Placements', points: ['Portfolio & showreel', 'Mock interviews & reviews', 'Placement drives & referrals'] },
 ];
 
 export const sessionFormat = [

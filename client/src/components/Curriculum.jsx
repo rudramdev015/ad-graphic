@@ -1,32 +1,77 @@
-import { Check, Clock } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { CheckCircle2, Clock } from 'lucide-react';
 import { curriculum, sessionFormat } from '../data/site.js';
 
+// One rich, dark tone per phase.
+const tones = ['#a3262b', '#08393b', '#3b1d5e', '#0f2a55', '#5a3d06', '#5c0f2e', '#1f2a1a'];
+
 export default function Curriculum() {
+  const listRef = useRef(null);
+
+  // As a later card slides over an earlier one, shrink + dim the earlier one.
+  useEffect(() => {
+    const list = listRef.current;
+    if (!list) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    const cards = [...list.querySelectorAll('.stack-card')];
+    let raf = 0;
+
+    const update = () => {
+      raf = 0;
+      const vh = window.innerHeight;
+      cards.forEach((card, i) => {
+        const next = cards[i + 1];
+        let p = 0;
+        if (next) {
+          const top = card.getBoundingClientRect().top;
+          const nextTop = next.getBoundingClientRect().top;
+          // 0 when the next card is a full screen away, 1 when it has fully covered this one
+          p = Math.min(1, Math.max(0, 1 - (nextTop - top) / (vh * 0.8)));
+        }
+        card.style.setProperty('--cover', p.toFixed(3));
+      });
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
-    <section className="section" id="curriculum">
+    <section className="section curriculum-sec" id="curriculum">
       <div className="container">
         <div className="section-head" data-reveal>
-          <span className="eyebrow">Curriculum</span>
-          <h2>Your road to <span className="serif-accent">professional editing.</span></h2>
-          <p>Seven focused phases that take you from your first cut to your first paycheque.</p>
+          <h2>Your Road to <span className="u-draw">Creative Mastery</span></h2>
+          <p>Seven focused phases that take you from your first design to your first paycheque.</p>
         </div>
 
-        <div className="timeline-v">
-          {curriculum.map((c) => (
-            <article className="phase" key={c.phase} data-reveal>
-              <span className="phase-dot">{c.phase}</span>
-              <div className="card phase-card">
-                <div className="phase-top">
-                  <h3>{c.title}</h3>
-                  <span className="tag">{c.weeks}</span>
-                </div>
+        <ol className="stack" ref={listRef}>
+          {curriculum.map((c, i) => (
+            <li
+              key={c.phase}
+              className="stack-card"
+              style={{ '--i': i, '--tone': tones[i % tones.length] }}
+            >
+              <div className="stack-copy">
+                <span className="stack-phase">Phase {i + 1} <em>· {c.weeks}</em></span>
+                <h3>{c.title}</h3>
                 <ul>
-                  {c.points.map((p) => <li key={p}><Check size={16} /> {p}</li>)}
+                  {c.points.map((p) => <li key={p}><CheckCircle2 size={20} /> {p}</li>)}
                 </ul>
               </div>
-            </article>
+              <figure className="stack-media">
+                <img src={c.image} alt="" loading="lazy" />
+                <span className="stack-num" aria-hidden="true">{c.phase}</span>
+              </figure>
+            </li>
           ))}
-        </div>
+        </ol>
 
         <div className="format" data-reveal>
           <h3><Clock size={20} /> What a typical day looks like</h3>

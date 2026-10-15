@@ -18,6 +18,7 @@ import Faq from './components/Faq.jsx';
 import Footer from './components/Footer.jsx';
 import ApplyModal from './components/ApplyModal.jsx';
 import { Preloader, ScrollProgress } from './components/Intro.jsx';
+import CookieBar from './components/CookieBar.jsx';
 
 export default function App() {
   const [applyOpen, setApplyOpen] = useState(false);
@@ -47,6 +48,7 @@ export default function App() {
       </main>
       <Footer onApply={openApply} />
       <ApplyModal open={applyOpen} onClose={() => setApplyOpen(false)} />
+      <CookieBar />
     </>
   );
 }
