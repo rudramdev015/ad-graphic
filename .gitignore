@@ -1,0 +1,7 @@
+node_modules
+dist
+server/data/applications.json
+.env
+server/uploads
+server/data/testimonials.json
+server/data/.admin-secret

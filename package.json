@@ -1,0 +1,15 @@
+{
+  "name": "adgraphic-academy",
+  "private": true,
+  "version": "1.0.0",
+  "description": "AdGraphic Academy - React + Node.js website",
+  "scripts": {
+    "install:all": "npm install && npm install --prefix client && npm install --prefix server",
+    "dev": "concurrently -n server,client -c blue,magenta \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "build": "npm run build --prefix client",
+    "start": "npm start --prefix server"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
