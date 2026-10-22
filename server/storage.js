@@ -1,8 +1,9 @@
 // ------------------------------------------------------------------
 //  Storage adapter
 //  - Local (default): JSON files in server/data, uploads in server/uploads
-//  - Vercel: private Vercel Blob for JSON docs, public Blob for media
-//    (enabled automatically when BLOB_READ_WRITE_TOKEN is set)
+//  - Vercel: JSON docs (sign-ups, content) in a PRIVATE Blob store
+//    (DATA_READ_WRITE_TOKEN); photos/videos in the public store
+//    (BLOB_READ_WRITE_TOKEN). Enabled automatically when a token is set.
 // ------------------------------------------------------------------
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -11,7 +12,8 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const DATA_DIR = path.join(__dirname, 'data');
 export const UPLOAD_DIR = path.join(__dirname, 'uploads');
-export const mode = process.env.BLOB_READ_WRITE_TOKEN ? 'blob' : 'local';
+const DATA_TOKEN = process.env.DATA_READ_WRITE_TOKEN || process.env.BLOB_READ_WRITE_TOKEN;
+export const mode = DATA_TOKEN ? 'blob' : 'local';
 
 const clone = (v) => (v === undefined ? v : structuredClone(v));
 let blobSdk;
@@ -40,7 +42,7 @@ const docPath = (name) => `data/${name}.json`;
 
 async function blobRead(name) {
   const { get } = await sdk();
-  const res = await get(docPath(name), { access: 'private', useCache: false });
+  const res = await get(docPath(name), { access: 'private', useCache: false, token: DATA_TOKEN });
   if (!res || res.statusCode !== 200) return { data: undefined, etag: null };
   const text = await new Response(res.stream).text();
   return { data: JSON.parse(text), etag: res.blob.etag };
@@ -52,8 +54,10 @@ async function blobWrite(name, data, etag) {
     access: 'private',
     contentType: 'application/json',
     addRandomSuffix: false,
-    allowOverwrite: true,
+    // first write must not clobber a doc another request just created
+    allowOverwrite: Boolean(etag),
     cacheControlMaxAge: 60,
+    token: DATA_TOKEN,
     ...(etag ? { ifMatch: etag } : {}),
   });
 }
@@ -94,7 +98,7 @@ async function blobMutate(name, fallback, fn) {
       await blobWrite(name, draft, etag);
       return result;
     } catch (err) {
-      const conflict = err instanceof BlobPreconditionFailedError || /precondition/i.test(err?.message || '');
+      const conflict = err instanceof BlobPreconditionFailedError || /precondition|already exists|conflict/i.test(err?.message || '');
       if (!conflict) throw err;
       await new Promise((r) => setTimeout(r, 60 * (attempt + 1) + Math.random() * 80));
     }

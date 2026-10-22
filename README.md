@@ -58,3 +58,22 @@ Open **http://localhost:5173/admin** (dev) or **/admin** on the live site.
 | GET | `/api/admin/export.csv` | Download all entries |
 
 The hero photo is `client/public/hero.jpg` (free Unsplash photo). Replace it with a photo of your own students/studio.
+
+## Live site (Vercel)
+
+- Website: https://ad-graphic.vercel.app
+- Admin: https://ad-graphic.vercel.app/admin (password is the `ADMIN_PASSWORD` set in Vercel → Settings → Environment Variables)
+- Deploy: `vercel --scope rudramdev015s-projects deploy --prod`
+
+Storage on Vercel:
+- `DATA_READ_WRITE_TOKEN` → **private** Blob store `ad-graphic-data` (sign-ups, website content, testimonials)
+- `BLOB_READ_WRITE_TOKEN` → public Blob store `ad-graphic-store` (uploaded photos & videos)
+
+Locally (no tokens) everything is saved in `server/data` and `server/uploads`.
+
+## Admin features
+
+- **Sign-ups** — pre-registrations / registrations / waitlist, pipeline, notes, call/WhatsApp/email, CSV export
+- **Website content** — edit text, photos and videos of every section; switch admission mode
+  (Pre-Register → Register → Waitlist) and every button on the site updates
+- **Video testimonials** — add, edit, reorder, hide, upload videos (up to 200 MB)
