@@ -224,6 +224,56 @@
 .vt-close:hover { background: var(--red); transform: rotate(90deg); }
 .vt-close svg { width: 22px; height: 22px; }
 
+/* ---------- Instagram reel cards ---------- */
+.vt-card--reel { padding: 14px 14px 16px; }
+.vt-card--reel .vt-window {
+  border-radius: 18px; padding: 3px;
+  background: linear-gradient(135deg, #feda75, #fa7e1e 25%, #d62976 50%, #962fbf 75%, #4f5bd5);
+  box-shadow: 0 18px 40px -14px rgba(214, 41, 118, 0.55);
+}
+.vt-card--reel .vt-thumb { aspect-ratio: 9 / 15; border-radius: 15px; }
+.vt-card--reel .vt-thumb::after { background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, transparent 22%, transparent 50%, rgba(0, 0, 0, 0.75)); }
+.vt-card--reel .vt-play { top: 50%; }
+
+/* story-style progress bar */
+.vt-story { position: absolute; top: 10px; left: 10px; right: 10px; z-index: 3; height: 3px; border-radius: 3px; background: rgba(255, 255, 255, 0.3); overflow: hidden; }
+.vt-story i { display: block; height: 100%; width: 0; background: #fff; border-radius: inherit; }
+.vt-card--reel:hover .vt-story i { animation: vt-story 4.5s linear forwards; }
+@keyframes vt-story { to { width: 100%; } }
+
+.vt-reel-badge {
+  position: absolute; top: 22px; left: 10px; z-index: 3;
+  display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px 5px 8px; border-radius: 999px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: #fff;
+  background: rgba(0, 0, 0, 0.42); border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.vt-reel-badge svg { width: 14px; height: 14px; }
+
+.vt-watch {
+  margin-top: 16px; align-self: stretch;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 11px 14px; border-radius: 12px;
+  font-size: 13px; font-weight: 700; color: #fff; text-decoration: none;
+  background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.16);
+  transition: background 0.3s, border-color 0.3s, transform 0.3s var(--ease);
+}
+.vt-watch svg { width: 16px; height: 16px; }
+.vt-watch:hover { background: linear-gradient(90deg, #d62976, #962fbf); border-color: transparent; transform: translateY(-2px); }
+.vt-watch:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.vt-card--reel .vt-apps { margin-top: 14px; }
+
+/* reel player */
+.vt-modal-body { display: grid; justify-items: center; gap: 14px; max-width: 100%; }
+.vt-stage.insta { width: min(400px, calc(100vw - 48px)); height: min(80vh, 720px); aspect-ratio: auto; background: #fff; }
+.vt-open-ig {
+  display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px;
+  font-size: 14px; font-weight: 700; color: #fff; text-decoration: none;
+  background: linear-gradient(90deg, #fa7e1e, #d62976, #962fbf);
+}
+.vt-open-ig svg { width: 16px; height: 16px; }
+.vt-open-ig:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
 /* ---------- responsive ---------- */
 @media (max-width: 1100px) { .vt { --per: 3; } }
 @media (max-width: 1240px) { .vt-prev { left: -8px; } .vt-next { right: -8px; } }

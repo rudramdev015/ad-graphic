@@ -3,12 +3,11 @@ import './videoTestimonials.css';
 import { brand, labels, sections, fill } from '../data/site.js';
 
 // Shown until the API responds (or if it is unreachable).
-const FALLBACK = [
-  { id: 'f1', name: 'Student 01', role: 'Graphic Design Student', quote: 'Learning design and editing side by side, inside a real studio.', poster: '/students/st01.jpg', video: '/studio.mp4' },
-  { id: 'f2', name: 'Student 02', role: 'Video Editing Student', quote: 'Every week brings a new brief and honest feedback from mentors.', poster: '/students/st02.jpg', video: '/studio.mp4' },
-  { id: 'f3', name: 'Student 03', role: 'Design + Video Student', quote: 'Daily practice on pro software, with mentors right beside you.', poster: '/students/st03.jpg', video: '/studio.mp4' },
-  { id: 'f4', name: 'Student 04', role: 'Motion Graphics Student', quote: 'From the basics of layout to full edits — one step at a time.', poster: '/students/st04.jpg', video: '/studio.mp4' },
-];
+const REELS = ['DafsRKlvTXn', 'Derp3ZKPHZt', 'DeR1byKuVIN', 'DeCdLLLPMsz', 'DdYkAs_ES8S', 'Dcu3XJOO_sC', 'DbZikfZD1wx', 'DZaGMMHPljE'];
+const FALLBACK = REELS.map((code, i) => {
+  const n = String(i + 1).padStart(2, '0');
+  return { id: `reel${i}`, name: `Student Story ${n}`, role: 'Student Reel', quote: '', poster: `/students/st${n}.jpg`, video: `https://www.instagram.com/reel/${code}/` };
+});
 
 const hue = (s) => [...String(s)].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 360, 7);
 
@@ -16,6 +15,12 @@ function parseVideo(url) {
   const u = String(url || '').trim();
   const yt = u.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/i);
   if (yt) return { kind: 'youtube', id: yt[1], vertical: /\/shorts\//i.test(u) };
+  const ig = u.match(/instagram\.com\/(?:[\w.]+\/)?(reels?|p|tv)\/([\w-]+)/i);
+  if (ig) {
+    const type = /^reel/i.test(ig[1]) ? 'reel' : ig[1].toLowerCase();
+    const link = `https://www.instagram.com/${type}/${ig[2]}/`;
+    return { kind: 'instagram', id: ig[2], link, embed: `${link}embed/`, vertical: true };
+  }
   return { kind: 'file', src: u, vertical: false };
 }
 
@@ -24,6 +29,7 @@ const PlayIcon = () => <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden=
 const MicIcon = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3" /><path d="M5 10a7 7 0 0 0 14 0M12 17v5" /></svg>;
 const CamIcon = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" aria-hidden="true"><rect x="2" y="6" width="14" height="12" rx="2" /><path d="m16 10 6-4v12l-6-4z" /></svg>;
 const MeetIcon = () => <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v2.5l5-3.5v12l-5-3.5V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg>;
+const IgIcon = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" /></svg>;
 const Chevron = ({ dir }) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={dir === 'left' ? 'm15 18-6-6 6-6' : 'm9 18 6-6-6-6'} /></svg>;
 
 /* ---------------- card ---------------- */
@@ -32,11 +38,13 @@ function Card({ t, i, onPlay }) {
   const [broken, setBroken] = useState(false);
   const showPoster = t.poster && !broken;
   const play = () => onPlay(t);
+  const v = parseVideo(t.video);
+  const reel = v.kind === 'instagram';
 
   return (
-    <article className="vt-card" style={{ '--i': i }} aria-roledescription="slide">
+    <article className={`vt-card ${reel ? 'vt-card--reel' : ''}`} style={{ '--i': i }} aria-roledescription="slide">
       <div className="vt-window">
-        <div className="vt-titlebar" aria-hidden="true"><i /><i /><i /></div>
+        {!reel && <div className="vt-titlebar" aria-hidden="true"><i /><i /><i /></div>}
         <div
           className="vt-thumb" role="button" tabIndex={0}
           aria-label={`Play video testimonial from ${t.name}`}
@@ -51,15 +59,22 @@ function Card({ t, i, onPlay }) {
               {t.name.trim()[0] || '?'}
             </div>
           )}
+          {reel && <span className="vt-story" aria-hidden="true"><i /></span>}
+          {reel && <span className="vt-reel-badge" aria-hidden="true"><IgIcon /> Reel</span>}
           <span className="vt-play" aria-hidden="true"><PlayIcon /></span>
           <div className="vt-lower" aria-hidden="true">
             <div className="vt-name"><b>{t.name}</b><span className="vt-logo">AD</span></div>
             <div className="vt-role">{t.role}</div>
           </div>
         </div>
-        <div className="vt-controls" aria-hidden="true"><MicIcon /><CamIcon /><span className="vt-rec" /></div>
+        {!reel && <div className="vt-controls" aria-hidden="true"><MicIcon /><CamIcon /><span className="vt-rec" /></div>}
       </div>
-      <p className="vt-quote">“{t.quote}”</p>
+      {t.quote && <p className="vt-quote">“{t.quote}”</p>}
+      {reel && (
+        <a className="vt-watch" href={v.link} target="_blank" rel="noopener noreferrer" draggable="false">
+          <IgIcon /> Watch on Instagram <span aria-hidden="true">↗</span>
+        </a>
+      )}
       <div className="vt-apps" aria-hidden="true">
         <span className="vt-app vt-app--meet"><MeetIcon /></span>
         <span className="vt-app vt-app--ae">Ae</span>
@@ -73,6 +88,7 @@ function Card({ t, i, onPlay }) {
 /* ---------------- modal ---------------- */
 function VideoModal({ item, onClose }) {
   const closeRef = useRef(null);
+  const linkRef = useRef(null);
   useEffect(() => {
     if (!item) return;
     const prev = document.activeElement;
@@ -80,7 +96,11 @@ function VideoModal({ item, onClose }) {
     closeRef.current?.focus();
     const onKey = (e) => {
       if (e.key === 'Escape') onClose();
-      if (e.key === 'Tab') { e.preventDefault(); closeRef.current?.focus(); }
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const atClose = document.activeElement === closeRef.current;
+        (atClose && linkRef.current ? linkRef.current : closeRef.current)?.focus();
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => {
@@ -99,8 +119,15 @@ function VideoModal({ item, onClose }) {
       <button ref={closeRef} className="vt-close" type="button" aria-label="Close video" onClick={onClose}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12" /></svg>
       </button>
-      <div className={`vt-stage ${v.vertical ? 'vertical' : ''}`}>
-        {v.kind === 'youtube' ? (
+      <div className="vt-modal-body">
+      <div className={`vt-stage ${v.vertical ? 'vertical' : ''} ${v.kind === 'instagram' ? 'insta' : ''}`}>
+        {v.kind === 'instagram' ? (
+          <iframe
+            src={v.embed}
+            title={`${item.name} testimonial`}
+            allow="autoplay; encrypted-media; picture-in-picture; fullscreen; clipboard-write" allowFullScreen
+          />
+        ) : v.kind === 'youtube' ? (
           <iframe
             src={`https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0&playsinline=1&modestbranding=1`}
             title={`${item.name} testimonial`}
@@ -109,6 +136,12 @@ function VideoModal({ item, onClose }) {
         ) : (
           <video src={v.src} poster={item.poster || undefined} controls autoPlay playsInline aria-label={`${item.name} testimonial`} />
         )}
+      </div>
+      {v.kind === 'instagram' && (
+        <a ref={linkRef} className="vt-open-ig" href={v.link} target="_blank" rel="noopener noreferrer">
+          <IgIcon /> Open on Instagram <span aria-hidden="true">↗</span>
+        </a>
+      )}
       </div>
     </div>
   );

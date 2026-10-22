@@ -386,21 +386,15 @@ app.delete('/api/admin/content/:key', requireAdmin, asyncRoute(async (req, res) 
 /* ------------------------------------------------------------------
    Video testimonials — public read, admin CRUD
    ------------------------------------------------------------------ */
-const SEED_TESTIMONIALS = [
-  ['Student 01', 'Graphic Design Student', 'Learning design and editing side by side, inside a real studio.', '/students/st01.jpg'],
-  ['Student 02', 'Video Editing Student', 'Every week brings a new brief and honest feedback from mentors.', '/students/st02.jpg'],
-  ['Student 03', 'Design + Video Student', 'Daily practice on pro software, with mentors right beside you.', '/students/st03.jpg'],
-  ['Student 04', 'Motion Graphics Student', 'From the basics of layout to full edits — one step at a time.', '/students/st04.jpg'],
-  ['Student 05', 'Graphic Design Student', 'Real projects, real deadlines, and a portfolio that grows every week.', '/students/st05.jpg'],
-  ['Student 06', 'Video Editing Student', 'The studio feels like a workplace, not a classroom.', '/students/st06.jpg'],
-  ['Student 07', 'Design + Video Student', 'Typography, colour and motion — practised on live work.', '/students/st07.jpg'],
-  ['Student 08', 'Video Editing Student', 'Small batches mean every timeline gets reviewed properly.', '/students/st08.jpg'],
-  ['Student 09', 'Graphic Design Student', 'Building a showreel and a design portfolio together.', '/students/st09.jpg'],
-  ['Student 10', 'Design + Video Student', 'Learning the tools the industry actually uses.', '/students/st10.jpg'],
-].map(([name, role, quote, poster], i) => ({
-  id: `seed${i}`, name, role, quote, poster, video: '/studio.mp4', published: true, order: i,
-  createdAt: '2026-10-22T00:00:00.000Z', updatedAt: '2026-10-22T00:00:00.000Z',
-}));
+const SEED_REELS = ['DafsRKlvTXn', 'Derp3ZKPHZt', 'DeR1byKuVIN', 'DeCdLLLPMsz', 'DdYkAs_ES8S', 'Dcu3XJOO_sC', 'DbZikfZD1wx', 'DZaGMMHPljE'];
+const SEED_TESTIMONIALS = SEED_REELS.map((code, i) => {
+  const n = String(i + 1).padStart(2, '0');
+  return {
+    id: `reel${i}`, name: `Student Story ${n}`, role: 'Student Reel', quote: '', poster: `/students/st${n}.jpg`,
+    video: `https://www.instagram.com/reel/${code}/`, published: true, order: i,
+    createdAt: '2026-10-22T00:00:00.000Z', updatedAt: '2026-10-22T00:00:00.000Z',
+  };
+});
 
 const readTestimonials = () => readDoc('testimonials', SEED_TESTIMONIALS);
 const mutateTestimonials = (fn) => mutateDoc('testimonials', SEED_TESTIMONIALS, async (list) => {
@@ -421,8 +415,7 @@ function validateTestimonial(body) {
   const errors = {};
   if (data.name.length < 2) errors.name = 'Name is required.';
   if (!data.role) errors.role = 'Role is required.';
-  if (!data.quote) errors.quote = 'Quote is required.';
-  if (!data.video || !isMediaUrl(data.video)) errors.video = 'Add a video link (MP4 or YouTube) or upload a file.';
+  if (!data.video || !isMediaUrl(data.video)) errors.video = 'Add a video link (MP4, YouTube or Instagram reel) or upload a file.';
   if (!isMediaUrl(data.poster)) errors.poster = 'Poster must be a valid URL or uploaded image.';
   return { data, errors };
 }

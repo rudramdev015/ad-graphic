@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  Plus, Pencil, Trash2, ArrowUp, ArrowDown, Eye, EyeOff, Upload, X, Loader2, Film, Image as ImageIcon, Youtube, Play,
+  Plus, Pencil, Trash2, ArrowUp, ArrowDown, Eye, EyeOff, Upload, X, Loader2, Film, Image as ImageIcon, Youtube, Play, Instagram,
 } from 'lucide-react';
 
 const empty = { name: '', role: '', quote: '', poster: '', video: '', published: true };
 const isYouTube = (u) => /youtube\.com|youtu\.be/i.test(u || '');
+const isInstagram = (u) => /instagram\.com\/(?:[\w.]+\/)?(?:reels?|p|tv)\//i.test(u || '');
 
 import { uploadMedia as uploadFile } from './upload.js';
 
@@ -82,14 +83,14 @@ export default function TestimonialsAdmin({ api, token, toast }) {
             <article key={t.id} className={`tm-card ${t.published ? '' : 'is-hidden'}`}>
               <div className="tm-thumb">
                 {t.poster ? <img src={t.poster} alt="" /> : <span className="tm-initial">{t.name[0]}</span>}
-                <span className="tm-badge">{isYouTube(t.video) ? <><Youtube size={12} /> YouTube</> : <><Film size={12} /> MP4</>}</span>
+                <span className="tm-badge">{isInstagram(t.video) ? <><Instagram size={12} /> Reel</> : isYouTube(t.video) ? <><Youtube size={12} /> YouTube</> : <><Film size={12} /> MP4</>}</span>
                 {!t.published && <span className="tm-hidden-tag"><EyeOff size={12} /> Hidden</span>}
                 <span className="tm-order">#{i + 1}</span>
               </div>
               <div className="tm-body">
                 <strong>{t.name}</strong>
                 <small>{t.role}</small>
-                <p>“{t.quote}”</p>
+                {t.quote && <p>“{t.quote}”</p>}
               </div>
               <div className="tm-actions">
                 <button title="Move up" onClick={() => move(i, -1)} disabled={i === 0}><ArrowUp size={16} /></button>
@@ -145,7 +146,7 @@ function MediaField({ label, kind, value, onChange, token, error }) {
       <div className="tm-media">
         <input
           className="tm-url" value={value} onChange={(e) => onChange(e.target.value)}
-          placeholder={kind === 'image' ? 'Paste image URL or upload →' : 'Paste MP4 / YouTube link or upload →'}
+          placeholder={kind === 'image' ? 'Paste image URL or upload →' : 'Paste MP4 / YouTube / Instagram reel link or upload →'}
         />
         <button type="button" className="adm-btn" onClick={() => inputRef.current?.click()} disabled={progress !== null}>
           {progress !== null ? <Loader2 size={16} className="adm-spin" /> : <Upload size={16} />} Upload
@@ -210,13 +211,13 @@ function Editor({ initial, isNew, token, onClose, onSave }) {
         </div>
 
         <label className={`adm-field ${errors.quote ? 'has-err' : ''}`}>
-          <span>Quote <em>({form.quote.length}/400)</em></span>
+          <span>Quote (optional) <em>({form.quote.length}/400)</em></span>
           <textarea rows={3} maxLength={400} value={form.quote} onChange={set('quote')} placeholder="One or two sentences in their words" />
           {errors.quote && <small className="tm-err">{errors.quote}</small>}
         </label>
 
         <MediaField label={<><ImageIcon size={14} /> Poster image (optional)</>} kind="image" value={form.poster} onChange={set('poster')} token={token} error={errors.poster} />
-        <MediaField label={<><Film size={14} /> Video {yt && <em className="tm-yt">YouTube detected{/shorts\//i.test(form.video) ? ' · Shorts (9:16)' : ''}</em>}</>} kind="video" value={form.video} onChange={set('video')} token={token} error={errors.video} />
+        <MediaField label={<><Film size={14} /> Video {yt && <em className="tm-yt">YouTube detected{/shorts\//i.test(form.video) ? ' · Shorts (9:16)' : ''}</em>}{isInstagram(form.video) && <em className="tm-yt">Instagram reel detected (9:16)</em>}</>} kind="video" value={form.video} onChange={set('video')} token={token} error={errors.video} />
 
         <label className="tm-switch">
           <input type="checkbox" checked={form.published} onChange={(e) => setForm((f) => ({ ...f, published: e.target.checked }))} />
