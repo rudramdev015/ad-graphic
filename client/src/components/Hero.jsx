@@ -9,7 +9,7 @@ export default function Hero({ onApply }) {
       <div className="hero-media" aria-hidden="true">
         <img
           src={hero.image} alt="" fetchpriority="high" decoding="async"
-          {...(hero.image === '/hero.jpg' && { srcSet: '/hero-1280.jpg 1280w, /hero.jpg 2400w', sizes: '100vw' })}
+          {...(hero.image === '/hero.webp' && { srcSet: '/hero-1280.webp 1280w, /hero.webp 2400w', sizes: '100vw' })}
         />
       </div>
       <div className="hero-shade" aria-hidden="true" />

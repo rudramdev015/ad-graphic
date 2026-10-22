@@ -17,13 +17,13 @@ function SvgMark({ size, ink = '#0a0a0a', cut = '#ffffff', bg = '#FFC800' }) {
   );
 }
 
-// The official AD Graphic's 2.0 logo (client/public/logo.png, or the one uploaded in Admin).
+// The official AD Graphic's 2.0 logo (client/public/logo.webp, or the one uploaded in Admin).
 export function Mark({ size = 40, ...rest }) {
   const [ok, setOk] = useState(true);
   if (!ok) return <SvgMark size={size} {...rest} />;
   return (
     <img
-      src={brand.logo || '/logo.png'} alt="" aria-hidden="true" width={size} height={size}
+      src={brand.logo || '/logo.webp'} alt="" aria-hidden="true" width={size} height={size}
       className="mark-img" style={{ width: size, height: size }} decoding="async" onError={() => setOk(false)}
     />
   );

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import useReveal from './hooks/useReveal.js';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
@@ -16,14 +16,24 @@ import Fit from './components/Fit.jsx';
 import Fees from './components/Fees.jsx';
 import Faq from './components/Faq.jsx';
 import Footer from './components/Footer.jsx';
-import ApplyModal from './components/ApplyModal.jsx';
 import { Preloader, ScrollProgress } from './components/Intro.jsx';
 import CookieBar from './components/CookieBar.jsx';
 
+// The apply form is only needed after a click, so it ships as its own chunk,
+// prefetched once the browser is idle.
+const loadApplyModal = () => import('./components/ApplyModal.jsx');
+const ApplyModal = lazy(loadApplyModal);
+
 export default function App() {
   const [applyOpen, setApplyOpen] = useState(false);
-  const openApply = () => setApplyOpen(true);
+  const [applyUsed, setApplyUsed] = useState(false);
+  const openApply = () => { setApplyUsed(true); setApplyOpen(true); };
   useReveal();
+
+  useEffect(() => {
+    const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 2500));
+    idle(() => loadApplyModal().catch(() => {}));
+  }, []);
 
   return (
     <>
@@ -47,7 +57,11 @@ export default function App() {
         <Faq />
       </main>
       <Footer onApply={openApply} />
-      <ApplyModal open={applyOpen} onClose={() => setApplyOpen(false)} />
+      {applyUsed && (
+        <Suspense fallback={null}>
+          <ApplyModal open={applyOpen} onClose={() => setApplyOpen(false)} />
+        </Suspense>
+      )}
       <CookieBar />
     </>
   );

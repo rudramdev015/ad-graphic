@@ -390,7 +390,7 @@ const SEED_REELS = ['DafsRKlvTXn', 'Derp3ZKPHZt', 'DeR1byKuVIN', 'DeCdLLLPMsz', 
 const SEED_TESTIMONIALS = SEED_REELS.map((code, i) => {
   const n = String(i + 1).padStart(2, '0');
   return {
-    id: `reel${i}`, name: `Student Story ${n}`, role: 'Student Reel', quote: '', poster: `/students/st${n}.jpg`,
+    id: `reel${i}`, name: `Student Story ${n}`, role: 'Student Reel', quote: '', poster: `/students/st${n}.webp`,
     video: `https://www.instagram.com/reel/${code}/`, published: true, order: i,
     createdAt: '2026-10-22T00:00:00.000Z', updatedAt: '2026-10-22T00:00:00.000Z',
   };

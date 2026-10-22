@@ -8,7 +8,7 @@ export const brand = {
   name: "AD Graphic's 2.0",
   short: "AD Graphic's",
   version: '2.0',
-  logo: '/logo.png', // upload a new logo from Admin → Website content
+  logo: '/logo.webp', // upload a new logo from Admin → Website content
   tagline: 'Creative Graphics Designing | Video Editing',
   about: 'Professional marketing agency specializing in digital strategies, video editing, and graphic design.',
   city: 'Jodhpur',
@@ -81,13 +81,13 @@ export const advantages = [
 ];
 
 export const curriculum = [
-  { phase: '01', image: '/phases/p1.jpg', weeks: 'Weeks 1–3', title: 'Design Foundations', points: ['Colour, typography & layout', 'Photoshop essentials', 'Composition & visual hierarchy'] },
-  { phase: '02', image: '/phases/p2.jpg', weeks: 'Weeks 4–6', title: 'Branding & Illustration', points: ['Logo & identity design in Illustrator', 'Brand guidelines', 'Posters, packaging & print'] },
-  { phase: '03', image: '/phases/p3.jpg', weeks: 'Weeks 7–9', title: 'Social Media Creatives', points: ['Ad creatives & carousels', 'Thumbnails that get clicks', 'Designing for every platform'] },
-  { phase: '04', image: '/phases/p4.jpg', weeks: 'Weeks 10–12', title: 'Video Editing', points: ['Premiere Pro workflow', 'Storytelling, pacing & hooks', 'Reels, shorts & long-form'] },
-  { phase: '05', image: '/phases/p5.jpg', weeks: 'Weeks 13–15', title: 'Motion Graphics', points: ['After Effects animation', 'Kinetic typography', 'Logo animations & templates'] },
-  { phase: '06', image: '/phases/p6.jpg', weeks: 'Weeks 16–18', title: 'Colour, Sound & Business', points: ['Colour grading in DaVinci Resolve', 'Sound design & mixing', 'Pricing, proposals & clients'] },
-  { phase: '07', image: '/phases/p7.jpg', weeks: 'Weeks 19–21', title: 'Portfolio & Placements', points: ['Portfolio & showreel', 'Mock interviews & reviews', 'Placement drives & referrals'] },
+  { phase: '01', image: '/phases/p1.webp', weeks: 'Weeks 1–3', title: 'Design Foundations', points: ['Colour, typography & layout', 'Photoshop essentials', 'Composition & visual hierarchy'] },
+  { phase: '02', image: '/phases/p2.webp', weeks: 'Weeks 4–6', title: 'Branding & Illustration', points: ['Logo & identity design in Illustrator', 'Brand guidelines', 'Posters, packaging & print'] },
+  { phase: '03', image: '/phases/p3.webp', weeks: 'Weeks 7–9', title: 'Social Media Creatives', points: ['Ad creatives & carousels', 'Thumbnails that get clicks', 'Designing for every platform'] },
+  { phase: '04', image: '/phases/p4.webp', weeks: 'Weeks 10–12', title: 'Video Editing', points: ['Premiere Pro workflow', 'Storytelling, pacing & hooks', 'Reels, shorts & long-form'] },
+  { phase: '05', image: '/phases/p5.webp', weeks: 'Weeks 13–15', title: 'Motion Graphics', points: ['After Effects animation', 'Kinetic typography', 'Logo animations & templates'] },
+  { phase: '06', image: '/phases/p6.webp', weeks: 'Weeks 16–18', title: 'Colour, Sound & Business', points: ['Colour grading in DaVinci Resolve', 'Sound design & mixing', 'Pricing, proposals & clients'] },
+  { phase: '07', image: '/phases/p7.webp', weeks: 'Weeks 19–21', title: 'Portfolio & Placements', points: ['Portfolio & showreel', 'Mock interviews & reviews', 'Placement drives & referrals'] },
 ];
 
 export const sessionFormat = [
@@ -196,19 +196,19 @@ export const proof = {
 
 export const studentStories = [
   { type: 'quote', quote: 'Every week brings a new brief and honest feedback from mentors.', name: 'Batch 01 student' },
-  { photo: '/students/st01.jpg', name: 'Student 01', company: "AD Graphic's 2.0", role: 'Graphic Design Student' },
-  { photo: '/students/st02.jpg', name: 'Student 02', company: "AD Graphic's 2.0", role: 'Video Editing Student' },
-  { photo: '/students/st03.jpg', name: 'Student 03', company: "AD Graphic's 2.0", role: 'Design + Video Student' },
+  { photo: '/students/st01.webp', name: 'Student 01', company: "AD Graphic's 2.0", role: 'Graphic Design Student' },
+  { photo: '/students/st02.webp', name: 'Student 02', company: "AD Graphic's 2.0", role: 'Video Editing Student' },
+  { photo: '/students/st03.webp', name: 'Student 03', company: "AD Graphic's 2.0", role: 'Design + Video Student' },
   { type: 'quote', quote: 'The studio feels like a workplace, not a classroom.', name: 'Batch 01 student' },
-  { photo: '/students/st04.jpg', name: 'Student 04', company: "AD Graphic's 2.0", role: 'Motion Graphics Student' },
-  { photo: '/students/st05.jpg', name: 'Student 05', company: "AD Graphic's 2.0", role: 'Graphic Design Student' },
-  { photo: '/students/st10.jpg', name: 'Student 10', company: "AD Graphic's 2.0", role: 'Design + Video Student' },
+  { photo: '/students/st04.webp', name: 'Student 04', company: "AD Graphic's 2.0", role: 'Motion Graphics Student' },
+  { photo: '/students/st05.webp', name: 'Student 05', company: "AD Graphic's 2.0", role: 'Graphic Design Student' },
+  { photo: '/students/st10.webp', name: 'Student 10', company: "AD Graphic's 2.0", role: 'Design + Video Student' },
 ];
 
 export const showcase = {
   heading: ['Inside the Studio Where We Build', 'the Next Top Creators'],
   video: 'https://www.instagram.com/reel/DdYkAs_ES8S/', // Instagram reel link or an MP4 file
-  poster: '/studio-poster.jpg',
+  poster: '/studio-poster.webp',
 };
 
 // ------------------------------------------------------------------
@@ -232,7 +232,7 @@ export const hero = {
   line1: 'Learn Design & Editing',
   line2Before: 'Inside a',
   highlight: 'Real Studio',
-  image: '/hero.jpg',
+  image: '/hero.webp',
   badges: ['Limited: Only {seats} Seats', 'Offline: {months} Months in {city}', 'Placement Support'],
   secondaryCta: 'View Student Results',
   note: '{batch} {modeNoun} now open · Graphic Design + Video Editing',

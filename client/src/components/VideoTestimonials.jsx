@@ -6,7 +6,7 @@ import { brand, labels, sections, fill } from '../data/site.js';
 const REELS = ['DafsRKlvTXn', 'Derp3ZKPHZt', 'DeR1byKuVIN', 'DeCdLLLPMsz', 'DdYkAs_ES8S', 'Dcu3XJOO_sC', 'DbZikfZD1wx', 'DZaGMMHPljE'];
 const FALLBACK = REELS.map((code, i) => {
   const n = String(i + 1).padStart(2, '0');
-  return { id: `reel${i}`, name: `Student Story ${n}`, role: 'Student Reel', quote: '', poster: `/students/st${n}.jpg`, video: `https://www.instagram.com/reel/${code}/` };
+  return { id: `reel${i}`, name: `Student Story ${n}`, role: 'Student Reel', quote: '', poster: `/students/st${n}.webp`, video: `https://www.instagram.com/reel/${code}/` };
 });
 
 const hue = (s) => [...String(s)].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 360, 7);
