@@ -100,7 +100,7 @@ export const TABS = [
   },
   {
     id: 'video', label: 'Studio video', icon: 'Film',
-    blocks: [{ key: 'showcase', title: 'Studio video section', fields: [list('heading', 'Heading (line 1, line 2)', { max: 2 }), vid('video', 'Video (MP4)'), img('poster', 'Cover image')] }],
+    blocks: [{ key: 'showcase', title: 'Studio video section', fields: [list('heading', 'Heading (line 1, line 2)', { max: 2 }), vid('video', 'Video (MP4 or Instagram reel link)'), img('poster', 'Cover image')] }],
   },
   {
     id: 'fees', label: 'Fees', icon: 'IndianRupee',

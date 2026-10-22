@@ -207,8 +207,8 @@ export const studentStories = [
 
 export const showcase = {
   heading: ['Inside the Studio Where We Build', 'the Next Top Creators'],
-  video: '/studio.mp4', // replace with your own studio video (mp4)
-  poster: '/video-poster.jpg',
+  video: 'https://www.instagram.com/reel/DdYkAs_ES8S/', // Instagram reel link or an MP4 file
+  poster: '/studio-poster.jpg',
 };
 
 // ------------------------------------------------------------------
