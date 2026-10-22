@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { CheckCircle2, Clock } from 'lucide-react';
 import { curriculum, sessionFormat } from '../data/site.js';
+import SectionHead from './SectionHead.jsx';
 
 // One rich, dark tone per phase.
 const tones = ['#a3262b', '#08393b', '#3b1d5e', '#0f2a55', '#5a3d06', '#5c0f2e', '#1f2a1a'];
@@ -46,10 +47,7 @@ export default function Curriculum() {
   return (
     <section className="section curriculum-sec" id="curriculum">
       <div className="container">
-        <div className="section-head" data-reveal>
-          <h2>Your Road to <span className="u-draw">Creative Mastery</span></h2>
-          <p>Seven focused phases that take you from your first design to your first paycheque.</p>
-        </div>
+        <SectionHead k="curriculum" />
 
         <ol className="stack" ref={listRef}>
           {curriculum.map((c, i) => (

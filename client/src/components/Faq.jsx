@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
-import { faqs, brand } from '../data/site.js';
+import { faqs, brand, sections, fill } from '../data/site.js';
 
 export default function Faq() {
   const [open, setOpen] = useState(0);
@@ -8,9 +8,9 @@ export default function Faq() {
     <section className="section section--panel" id="faqs">
       <div className="container faq-wrap">
         <div className="faq-intro" data-reveal>
-          <span className="eyebrow">FAQs</span>
-          <h2>Questions? <span className="serif-accent">Answered.</span></h2>
-          <p>Still unsure? Message us on WhatsApp and talk to a real person from the team.</p>
+          <span className="eyebrow">{fill(sections.faq.eyebrow)}</span>
+          <h2>{fill(sections.faq.title)} <span className="serif-accent">{fill(sections.faq.highlight)}</span></h2>
+          <p>{fill(sections.faq.sub)}</p>
           <a className="btn btn-ghost" href={brand.whatsapp} target="_blank" rel="noreferrer">Chat on WhatsApp</a>
         </div>
         <div className="faq-list">

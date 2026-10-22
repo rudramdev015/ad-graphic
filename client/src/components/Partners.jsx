@@ -1,14 +1,12 @@
 import { ShieldCheck, Infinity as InfinityIcon } from 'lucide-react';
 import { partners } from '../data/site.js';
+import SectionHead from './SectionHead.jsx';
 
 export default function Partners() {
   return (
     <section className="section">
       <div className="container">
-        <div className="section-head" data-reveal>
-          <span className="eyebrow">Hiring network</span>
-          <h2>Get in front of <span className="serif-accent">the people hiring.</span></h2>
-        </div>
+        <SectionHead k="partners" accent="serif-accent" />
         <div className="partners" data-reveal>
           {partners.map((p) => <div className="partner" key={p}>{p}</div>)}
         </div>

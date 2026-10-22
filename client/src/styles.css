@@ -1199,3 +1199,75 @@ h1, h2 { font-family: var(--font); font-weight: 800 !important; text-transform: 
 @media (min-width: 761px) and (max-width: 1100px) {
   .cmp-hint { display: block; }
 }
+
+/* ============================================================
+   v10 — mobile stability: no sideways shake, smooth scrolling
+   ============================================================ */
+/* 1. Nothing may ever widen the page. `clip` (unlike `hidden`) keeps position: sticky working. */
+html, body { overflow-x: clip; max-width: 100%; }
+@supports not (overflow: clip) {
+  body { overflow-x: hidden; }
+}
+main, footer { overflow-x: clip; }
+img, video, svg, iframe { max-width: 100%; }
+
+/* 2. The tilted keyword strip: rotated inside its own clipping box. */
+.ticker-clip { position: relative; z-index: 2; overflow: hidden; padding: 18px 0 22px; margin: -8px 0 -22px; }
+.ticker { margin: 0 -24px; transform: rotate(-1.2deg); }
+
+/* 3. Stop scroll chaining / rubber-band jiggle on touch screens. */
+html { overscroll-behavior-x: none; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { touch-action: pan-y pinch-zoom; -webkit-tap-highlight-color: transparent; }
+.vt-viewport, .cmp-scroll, .cm-tabs { touch-action: pan-x pan-y; overscroll-behavior-x: contain; }
+
+/* 4. Notched phones: keep fixed UI clear of the home indicator. */
+.ft-wa-float { bottom: max(22px, env(safe-area-inset-bottom)); }
+.cookie { bottom: max(22px, calc(env(safe-area-inset-bottom) + 12px)); }
+
+@media (max-width: 760px) {
+  /* 5. Lighter, steadier scroll effects on phones (no per-frame filter repaints). */
+  .stack-card { filter: none !important; transform: scale(calc(1 - var(--cover) * 0.03)); will-change: transform; }
+  .stack-media img { transform: none !important; }
+  .showcase-frame { transform: none !important; }
+  .results-numeral { display: none; }
+  .hero-media img { animation: heroFade 1.2s ease both; transform: none; }
+  .orb, .results-glow { filter: blur(50px); }
+
+  /* 6. Inputs at 16px so iOS never zooms (and jumps) when you tap a field. */
+  input, select, textarea { font-size: 16px !important; }
+
+  /* 7. Comfortable tap targets. */
+  .nav-mobile a { min-height: 48px; display: flex; align-items: center; }
+  .faq-q { min-height: 56px; }
+  .vt-dot { min-width: 9px; height: 9px; }
+  .vt-dots { gap: 10px; padding: 8px 0; }
+
+  /* 8. Tidy spacing & type. */
+  .section { padding: 72px 0; }
+  .section-head { margin-bottom: 34px; gap: 12px; }
+  .section-head h2, .adv-intro h2, .faq-intro h2 { font-size: clamp(30px, 8.4vw, 40px); }
+  .section-head p { font-size: 16px; }
+  .hero-content { padding-left: 4px; padding-right: 4px; }
+  .fee-price { font-size: clamp(40px, 12vw, 52px); }
+  .ft-cta-copy h2 { font-size: clamp(30px, 8.4vw, 40px); }
+}
+
+/* 8. Respect users who prefer less motion. */
+@media (prefers-reduced-motion: reduce) {
+  .ticker { transform: none; }
+  .story-track, .ticker-track, .marquee-track { animation: none !important; }
+}
+
+/* compact cookie strip on phones — never covers the page or the WhatsApp button */
+@media (max-width: 640px) {
+  .cookie {
+    left: 12px; right: 84px; transform: translateY(160%); max-width: none;
+    flex-direction: row; align-items: center; gap: 10px; text-align: left;
+    padding: 10px 10px 10px 14px; border-radius: 16px;
+  }
+  .cookie.show { transform: none; }
+  .cookie p { font-size: 12.5px; line-height: 1.35; }
+  .cookie-actions { gap: 4px; }
+  .cookie button { padding: 8px 12px; font-size: 13px; }
+  .cookie .cookie-decline { padding: 8px 6px; }
+}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Menu, X, ArrowRight } from 'lucide-react';
-import { brand, nav } from '../data/site.js';
+import { brand, nav, labels } from '../data/site.js';
 import Logo from './Logo.jsx';
 
 export default function Navbar({ onApply }) {
@@ -22,7 +22,7 @@ export default function Navbar({ onApply }) {
           {nav.map((n) => <a key={n.href} href={n.href}>{n.label}</a>)}
         </nav>
         <button className="btn btn-primary nav-cta" onClick={onApply}>
-          Pre-Register for {brand.batch} <ArrowRight size={16} />
+          {labels().cta} <ArrowRight size={16} />
         </button>
         <button className="nav-burger" aria-label="Menu" aria-expanded={open} onClick={() => setOpen(!open)}>
           {open ? <X size={22} /> : <Menu size={22} />}
@@ -31,7 +31,7 @@ export default function Navbar({ onApply }) {
       <div className="nav-mobile">
         {nav.map((n) => <a key={n.href} href={n.href} onClick={() => setOpen(false)}>{n.label}</a>)}
         <button className="btn btn-primary" onClick={() => { setOpen(false); onApply(); }}>
-          Pre-Register for {brand.batch}
+          {labels().cta}
         </button>
       </div>
     </header>

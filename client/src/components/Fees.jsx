@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Check, Info, Award } from 'lucide-react';
-import { brand, fees } from '../data/site.js';
+import { brand, fees, labels } from '../data/site.js';
+import SectionHead from './SectionHead.jsx';
 
 const inr = (n) => `₹${n.toLocaleString('en-IN')}`;
 
@@ -52,10 +53,7 @@ export default function Fees({ onApply }) {
   return (
     <section className="section fees-sec" id="fees">
       <div className="container">
-        <div className="section-head" data-reveal>
-          <h2>Fees &amp; <span className="u-draw">Admission</span></h2>
-          <p>Only {brand.seats} seats in {brand.batch} — secure yours before they’re gone.</p>
-        </div>
+        <SectionHead k="fees" />
 
         <div className="fee-grid">
           <Step num="01" title="Submit Your Application" sub="Takes about two minutes to fill." delay={0}>
@@ -66,9 +64,9 @@ export default function Fees({ onApply }) {
               <li><Tick /> Not selected? You get a full refund.</li>
             </ul>
             <div className="fee-foot">
-              <p className="fee-note"><Info size={15} /> {brand.batch} pre-registrations are open now</p>
+              <p className="fee-note"><Info size={15} /> {brand.batch} {labels().noun} are open now</p>
               <button className="fee-btn" onClick={onApply}>
-                <span>Pre-Register for {brand.batch}</span> <ArrowRight size={20} />
+                <span>{labels().cta}</span> <ArrowRight size={20} />
               </button>
             </div>
           </Step>

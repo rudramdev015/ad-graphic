@@ -1,14 +1,11 @@
 import { tools, skills } from '../data/site.js';
+import SectionHead from './SectionHead.jsx';
 
 export default function Toolkit() {
   return (
     <section className="section section--panel">
       <div className="container">
-        <div className="section-head" data-reveal>
-          <span className="eyebrow">Tools & skills</span>
-          <h2>Master the <span className="serif-accent">industry toolkit.</span></h2>
-          <p>The software studios use, plus the soft skills that get you rehired.</p>
-        </div>
+        <SectionHead k="toolkit" accent="serif-accent" />
         <div className="tools">
           {tools.map((t) => (
             <div className="tool" key={t.name} data-reveal>

@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   LogOut, RefreshCw, Eye, EyeOff, Download, Search, Users, CalendarClock, PhoneCall, GraduationCap, Mail,
-  X, Trash2, Lock, Loader2, ArrowUpRight, Inbox, MessageCircle, Film,
+  X, Trash2, Lock, Loader2, ArrowUpRight, Inbox, MessageCircle, Film, LayoutTemplate,
 } from 'lucide-react';
 import TestimonialsAdmin from './TestimonialsAdmin.jsx';
+import ContentAdmin from './ContentAdmin.jsx';
+
+const KIND_LABEL = { 'pre-registration': 'Pre-registration', registration: 'Registration', waitlist: 'Waitlist' };
 import { Mark } from '../components/Logo.jsx';
 import { brand } from '../data/site.js';
 import './admin.css';
@@ -190,10 +193,13 @@ function Dashboard({ token, onLogout }) {
         <div className="adm-brand"><Mark size={40} /><div><strong>{brand.short}</strong><small>Admin {brand.version}</small></div></div>
         <nav>
           <button className={type === 'registration' ? 'active' : ''} onClick={() => setType('registration')}>
-            <Users size={18} /> Pre-registrations <em>{s?.total ?? '–'}</em>
+            <Users size={18} /> Sign-ups <em>{s?.total ?? '–'}</em>
           </button>
           <button className={type === 'brochure' ? 'active' : ''} onClick={() => setType('brochure')}>
             <Mail size={18} /> Brochure requests <em>{s?.brochures ?? '–'}</em>
+          </button>
+          <button className={type === 'content' ? 'active' : ''} onClick={() => setType('content')}>
+            <LayoutTemplate size={18} /> Website content
           </button>
           <button className={type === 'testimonials' ? 'active' : ''} onClick={() => setType('testimonials')}>
             <Film size={18} /> Video testimonials
@@ -206,12 +212,14 @@ function Dashboard({ token, onLogout }) {
       </aside>
 
       <main className="adm-main">
-        {type === 'testimonials' ? (
+        {type === 'content' ? (
+          <ContentAdmin api={api} token={token} toast={setToast} />
+        ) : type === 'testimonials' ? (
           <TestimonialsAdmin api={api} token={token} toast={setToast} />
         ) : (<>
         <header className="adm-top">
           <div>
-            <h1>{type === 'registration' ? 'Pre-registrations' : 'Brochure requests'}</h1>
+            <h1>{type === 'registration' ? 'Sign-ups' : 'Brochure requests'}</h1>
             <p>{brand.batch} · auto-refreshes every 30s</p>
           </div>
           <div className="adm-top-actions">
@@ -224,7 +232,7 @@ function Dashboard({ token, onLogout }) {
         </header>
 
         <section className="adm-stats">
-          <Stat icon={Users} label="Total pre-registrations" value={s?.total} tone="yellow" />
+          <Stat icon={Users} label="Total sign-ups" value={s?.total} tone="yellow" />
           <Stat icon={CalendarClock} label="New today" value={s?.today} tone="red" />
           <Stat icon={PhoneCall} label="Contacted / interview" value={s ? s.byStatus.contacted + s.byStatus.interview : undefined} tone="blue" />
           <Stat icon={GraduationCap} label="Enrolled" value={s?.byStatus.enrolled} tone="green" />
@@ -293,7 +301,7 @@ function Dashboard({ token, onLogout }) {
                       <td data-label="Student">
                         <div className="adm-person">
                           <span className="adm-avatar">{initials(e.name)}</span>
-                          <div><strong>{e.name || e.email}</strong><small>{e.city || '—'}</small></div>
+                          <div><strong>{e.name || e.email}</strong><small>{e.city || '—'}{e.type === 'registration' && <span className={`adm-kind adm-kind--${e.kind || 'pre-registration'}`}>{KIND_LABEL[e.kind] || 'Pre-registration'}</span>}</small></div>
                         </div>
                       </td>
                       <td data-label="Contact"><div className="adm-contact"><span>{e.email}</span><small>{e.phone || '—'}</small></div></td>

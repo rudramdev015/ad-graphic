@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vercel/blob": "^2.8.2",
     "adgraphic-academy": "file:..",
     "lucide-react": "^0.441.0",
     "react": "^18.3.1",

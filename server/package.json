@@ -9,6 +9,7 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "@vercel/blob": "^2.8.2",
     "adgraphic-academy": "file:..",
     "cors": "^2.8.5",
     "express": "^4.21.0"

@@ -8,6 +8,7 @@ export const brand = {
   name: "AD Graphic's 2.0",
   short: "AD Graphic's",
   version: '2.0',
+  logo: '/logo.png', // upload a new logo from Admin → Website content
   tagline: 'Creative Graphics Designing | Video Editing',
   about: 'Professional marketing agency specializing in digital strategies, video editing, and graphic design.',
   city: 'Jodhpur',
@@ -180,8 +181,8 @@ export const faqs = [
 
 // ------------------------------------------------------------------
 //  Results section — proof points + student story cards
-//  Photos live in client/public/students/ (free stock placeholders —
-//  replace with real photos of your students).
+//  Photos live in client/public/students/ (real AD Graphic's students).
+//  Names show as "Student 01" etc. — replace them with real names.
 // ------------------------------------------------------------------
 export const proof = {
   heading: ['Proof From', 'Our First Batch'],
@@ -194,14 +195,14 @@ export const proof = {
 };
 
 export const studentStories = [
-  { type: 'quote', quote: 'I used to freelance without any real process. The mentors here gave me structure, taste and the confidence to pitch bigger clients.', name: 'Aarav Mehta' },
-  { photo: '/students/s1.jpg', name: 'Aarav Mehta', company: 'Northwind Media', role: 'Video Editor' },
-  { photo: '/students/s2.jpg', name: 'Simran Kaur', company: 'Pixel & Co.', role: 'Graphic Designer' },
-  { photo: '/students/s3.jpg', name: 'Rohan Verma', company: 'Freelance', role: 'Motion Designer' },
-  { type: 'quote', quote: 'Designing in the morning and editing in the afternoon — on real briefs — is the fastest I have ever learned anything.', name: 'Ishita Sharma' },
-  { photo: '/students/s4.jpg', name: 'Ishita Sharma', company: 'Hello Social', role: 'Social Media Designer' },
-  { photo: '/students/s5.jpg', name: 'Kabir Singh', company: 'Studio Nine', role: 'Content Lead' },
-  { photo: '/students/s6.jpg', name: 'Neha Gupta', company: 'Kite Creative', role: 'Brand Designer' },
+  { type: 'quote', quote: 'Every week brings a new brief and honest feedback from mentors.', name: 'Batch 01 student' },
+  { photo: '/students/st01.jpg', name: 'Student 01', company: "AD Graphic's 2.0", role: 'Graphic Design Student' },
+  { photo: '/students/st02.jpg', name: 'Student 02', company: "AD Graphic's 2.0", role: 'Video Editing Student' },
+  { photo: '/students/st03.jpg', name: 'Student 03', company: "AD Graphic's 2.0", role: 'Design + Video Student' },
+  { type: 'quote', quote: 'The studio feels like a workplace, not a classroom.', name: 'Batch 01 student' },
+  { photo: '/students/st04.jpg', name: 'Student 04', company: "AD Graphic's 2.0", role: 'Motion Graphics Student' },
+  { photo: '/students/st05.jpg', name: 'Student 05', company: "AD Graphic's 2.0", role: 'Graphic Design Student' },
+  { photo: '/students/st10.jpg', name: 'Student 10', company: "AD Graphic's 2.0", role: 'Design + Video Student' },
 ];
 
 export const showcase = {
@@ -209,3 +210,113 @@ export const showcase = {
   video: '/studio.mp4', // replace with your own studio video (mp4)
   poster: '/video-poster.jpg',
 };
+
+// ------------------------------------------------------------------
+//  Editable from Admin → Website content
+//  Text fields may use {batch} {seats} {months} {city} {name} placeholders.
+// ------------------------------------------------------------------
+
+// How the sign-up buttons and form behave.
+//  'pre-register' → "Pre-Register for Batch 01"
+//  'register'     → "Register for Batch 01"
+//  'closed'       → "Join the Waitlist" (form still works, saved as waitlist)
+export const admissions = {
+  mode: 'pre-register',
+  customCta: '', // optional: overrides every button label when filled
+  successMessage: 'Our team will call or WhatsApp you within 48 hours with the next steps.',
+  showAnnouncement: true,
+  announcement: '{batch} admissions are open — only {seats} seats',
+};
+
+export const hero = {
+  line1: 'Learn Design & Editing',
+  line2Before: 'Inside a',
+  highlight: 'Real Studio',
+  image: '/hero.jpg',
+  badges: ['Limited: Only {seats} Seats', 'Offline: {months} Months in {city}', 'Placement Support'],
+  secondaryCta: 'View Student Results',
+  note: '{batch} {modeNoun} now open · Graphic Design + Video Editing',
+};
+
+export const sections = {
+  testimonials: { pill: 'Real Students · Real Results', title: 'What Our', highlight: '{batch}', after: 'Students Say' },
+  pillars: { title: 'Not Just Another', highlight: '‘Course’', sub: 'Built for people who want careers, not certificates.' },
+  advantages: { eyebrow: 'The {name} advantage', title: 'Learn where the', highlight: 'real work', after: 'happens.', sub: 'You will not be practising on stock clips in a classroom. You will be inside a live creative studio, working on briefs that actually go out to clients.' },
+  curriculum: { title: 'Your Road to', highlight: 'Creative Mastery', sub: 'Seven focused phases that take you from your first design to your first paycheque.' },
+  toolkit: { eyebrow: 'Tools & skills', title: 'Master the', highlight: 'industry toolkit.', sub: 'The software studios use, plus the soft skills that get you rehired.' },
+  partners: { eyebrow: 'Hiring network', title: 'Get in front of', highlight: 'the people hiring.' },
+  compare: { title: 'Compare Your', highlight: 'Options', sub: 'See why students choose a studio over a screen or a classroom.' },
+  fit: { eyebrow: 'Is this for you?', title: 'Be honest with', highlight: 'yourself.' },
+  fees: { title: 'Fees &', highlight: 'Admission', sub: 'Only {seats} seats in {batch} — secure yours before they’re gone.' },
+  faq: { eyebrow: 'FAQs', title: 'Questions?', highlight: 'Answered.', sub: 'Still unsure? Message us on WhatsApp and talk to a real person from the team.' },
+  footer: { ctaTitle: 'Seats Are Filling Fast', ctaText: 'Start your creative career today.' },
+};
+
+/* ------------------------------------------------------------------
+   Helpers
+   ------------------------------------------------------------------ */
+const MODE_TEXT = {
+  'pre-register': { verb: 'Pre-Register', noun: 'pre-registrations', done: 'You are pre-registered! 🎉', submit: 'Pre-Register Now' },
+  register: { verb: 'Register', noun: 'registrations', done: 'Registration received! 🎉', submit: 'Register Now' },
+  closed: { verb: 'Join the Waitlist', noun: 'waitlist sign-ups', done: 'You are on the waitlist! 🎉', submit: 'Join Waitlist' },
+};
+
+/** Labels for every sign-up button and the form, based on admissions.mode. */
+export function labels() {
+  const m = MODE_TEXT[admissions.mode] || MODE_TEXT['pre-register'];
+  const base = admissions.mode === 'closed' ? m.verb : `${m.verb} for ${brand.batch}`;
+  const cta = admissions.customCta?.trim() || base;
+  return { cta, short: admissions.customCta?.trim() || m.verb, title: cta, submit: m.submit, done: m.done, noun: m.noun, mode: admissions.mode };
+}
+
+/** Fill {batch} {seats} {months} {city} {name} {modeNoun} placeholders. */
+export function fill(text) {
+  return String(text ?? '').replace(/\{(\w+)\}/g, (all, key) => ({
+    batch: brand.batch, seats: brand.seats, months: brand.durationMonths, city: brand.city,
+    name: brand.short, modeNoun: labels().noun,
+  })[key] ?? all);
+}
+
+/* ------------------------------------------------------------------
+   Content overrides from the server (Admin → Website content)
+   ------------------------------------------------------------------ */
+const isObj = (v) => v && typeof v === 'object' && !Array.isArray(v);
+
+function mergeInto(target, src) {
+  for (const [k, v] of Object.entries(src)) {
+    if (Array.isArray(v)) target[k] = structuredClone(v);
+    else if (isObj(v) && isObj(target[k])) mergeInto(target[k], v);
+    else target[k] = v;
+  }
+}
+
+// Every editable export, by the key used in the admin and the API.
+export const EDITABLE = {
+  brand, admissions, hero, sections, stats, proof, studentStories, pillars, advantages,
+  curriculum, sessionFormat, skills, partners, comparison, fit, fees, faqs, showcase,
+};
+
+// Untouched copy of the defaults (used by the admin "reset" and the editor).
+export const DEFAULTS = structuredClone(EDITABLE);
+
+/** Apply saved overrides in place so every component sees them. */
+export function applyContent(overrides = {}) {
+  for (const [key, value] of Object.entries(overrides || {})) {
+    const target = EDITABLE[key];
+    if (target === undefined || value == null) continue;
+    if (Array.isArray(target)) {
+      if (Array.isArray(value)) target.splice(0, target.length, ...structuredClone(value));
+    } else if (isObj(value)) {
+      mergeInto(target, value);
+    }
+  }
+  // keep derived contact fields in sync
+  const digits = String(brand.phone || '').replace(/\D/g, '');
+  if (digits) {
+    brand.phoneHref = `tel:+${digits.length === 10 ? '91' + digits : digits}`;
+    if (!overrides?.brand?.whatsapp) brand.whatsapp = `https://wa.me/${digits.length === 10 ? '91' + digits : digits}`;
+  }
+  if (brand.address && !overrides?.brand?.mapsUrl) {
+    brand.mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(brand.address);
+  }
+}

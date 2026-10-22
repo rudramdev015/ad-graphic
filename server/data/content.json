@@ -1,0 +1,16 @@
+{
+  "_updatedAt": "2026-10-22T05:48:06.797Z",
+  "hero": {
+    "line1": "Learn Design & Editing",
+    "line2Before": "Inside a",
+    "highlight": "Real Studio",
+    "image": "/uploads/mvj4dtoy-9e5fb55d7d.jpg",
+    "badges": [
+      "Limited: Only {seats} Seats",
+      "Offline: {months} Months in {city}",
+      "Placement Support"
+    ],
+    "secondaryCta": "View Student Results",
+    "note": "{batch} {modeNoun} now open · Graphic Design + Video Editing"
+  }
+}

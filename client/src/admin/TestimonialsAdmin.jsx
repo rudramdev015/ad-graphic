@@ -6,24 +6,7 @@ import {
 const empty = { name: '', role: '', quote: '', poster: '', video: '', published: true };
 const isYouTube = (u) => /youtube\.com|youtu\.be/i.test(u || '');
 
-// XHR upload so we can show real progress.
-function uploadFile(file, token, onProgress) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/api/admin/upload');
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`);
-    xhr.setRequestHeader('Content-Type', 'application/octet-stream');
-    xhr.setRequestHeader('X-Filename', encodeURIComponent(file.name));
-    xhr.upload.onprogress = (e) => e.lengthComputable && onProgress(Math.round((e.loaded / e.total) * 100));
-    xhr.onload = () => {
-      let data = {};
-      try { data = JSON.parse(xhr.responseText); } catch { /* ignore */ }
-      xhr.status < 300 ? resolve(data) : reject(new Error(data.error || 'Upload failed'));
-    };
-    xhr.onerror = () => reject(new Error('Network error during upload'));
-    xhr.send(file);
-  });
-}
+import { uploadMedia as uploadFile } from './upload.js';
 
 export default function TestimonialsAdmin({ api, token, toast }) {
   const [list, setList] = useState([]);

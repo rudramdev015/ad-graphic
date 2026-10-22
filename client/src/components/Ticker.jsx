@@ -2,7 +2,8 @@ const items = ['GRAPHIC DESIGN', 'VIDEO EDITING', 'MOTION GRAPHICS', 'BRANDING',
 
 export default function Ticker() {
   return (
-    <div className="ticker" aria-hidden="true">
+    <div className="ticker-clip" aria-hidden="true">
+    <div className="ticker">
       <div className="ticker-track">
         {[0, 1].map((k) => (
           <span key={k}>
@@ -10,6 +11,7 @@ export default function Ticker() {
           </span>
         ))}
       </div>
+    </div>
     </div>
   );
 }

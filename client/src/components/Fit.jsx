@@ -1,14 +1,12 @@
 import { CheckCircle2, XCircle, ArrowRight } from 'lucide-react';
-import { fit } from '../data/site.js';
+import { fit, labels } from '../data/site.js';
+import SectionHead from './SectionHead.jsx';
 
 export default function Fit({ onApply }) {
   return (
     <section className="section">
       <div className="container">
-        <div className="section-head" data-reveal>
-          <span className="eyebrow">Is this for you?</span>
-          <h2>Be honest with <span className="serif-accent">yourself.</span></h2>
-        </div>
+        <SectionHead k="fit" accent="serif-accent" />
         <div className="fit">
           <div className="card fit-card fit-card--yes" data-reveal>
             <h3>Claim a seat if…</h3>

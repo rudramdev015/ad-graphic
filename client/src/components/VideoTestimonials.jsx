@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import './videoTestimonials.css';
-import { brand } from '../data/site.js';
+import { brand, labels, sections, fill } from '../data/site.js';
 
 // Shown until the API responds (or if it is unreachable).
 const FALLBACK = [
-  { id: 'f1', name: 'Aarav Mehta', role: 'Freelance Video Editor', quote: 'I went from random phone edits to delivering brand films for paying clients in five months.', poster: '/students/s1.jpg', video: '/studio.mp4' },
-  { id: 'f2', name: 'Simran Kaur', role: 'Graphic Designer', quote: 'Learning design and editing together made me twice as valuable to every client I pitch.', poster: '/students/s2.jpg', video: '/studio.mp4' },
-  { id: 'f3', name: 'Rohan Verma', role: 'Motion Designer', quote: 'The mentors reviewed my timeline line by line. That feedback changed how I animate.', poster: '/students/s3.jpg', video: '/studio.mp4' },
-  { id: 'f4', name: 'Ishita Sharma', role: 'Social Media Designer', quote: 'Every week was a real brief. My portfolio was full of live work before graduation.', poster: '/students/s4.jpg', video: '/studio.mp4' },
+  { id: 'f1', name: 'Student 01', role: 'Graphic Design Student', quote: 'Learning design and editing side by side, inside a real studio.', poster: '/students/st01.jpg', video: '/studio.mp4' },
+  { id: 'f2', name: 'Student 02', role: 'Video Editing Student', quote: 'Every week brings a new brief and honest feedback from mentors.', poster: '/students/st02.jpg', video: '/studio.mp4' },
+  { id: 'f3', name: 'Student 03', role: 'Design + Video Student', quote: 'Daily practice on pro software, with mentors right beside you.', poster: '/students/st03.jpg', video: '/studio.mp4' },
+  { id: 'f4', name: 'Student 04', role: 'Motion Graphics Student', quote: 'From the basics of layout to full edits — one step at a time.', poster: '/students/st04.jpg', video: '/studio.mp4' },
 ];
 
 const hue = (s) => [...String(s)].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 360, 7);
@@ -227,8 +227,8 @@ export default function VideoTestimonials({ onApply }) {
     <section ref={rootRef} className={`vt ${inView ? 'in' : ''}`} id="testimonials" aria-labelledby="vt-title">
       <div className="vt-wrap">
         <header className="vt-head">
-          <span className="vt-pill">Real Students · Real Results</span>
-          <h2 className="vt-title" id="vt-title">What Our <span className="vt-hl">{brand.batch}</span> Students Say</h2>
+          <span className="vt-pill">{fill(sections.testimonials.pill)}</span>
+          <h2 className="vt-title" id="vt-title">{fill(sections.testimonials.title)} <span className="vt-hl">{fill(sections.testimonials.highlight)}</span> {fill(sections.testimonials.after)}</h2>
         </header>
 
         <div
@@ -261,7 +261,7 @@ export default function VideoTestimonials({ onApply }) {
         </div>
 
         <div className="vt-cta-row">
-          <button type="button" className="vt-cta" onClick={onApply}>Pre-Register for {brand.batch} <span aria-hidden="true">→</span></button>
+          <button type="button" className="vt-cta" onClick={onApply}>{labels().cta} <span aria-hidden="true">→</span></button>
         </div>
       </div>
 

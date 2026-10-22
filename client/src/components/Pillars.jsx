@@ -1,5 +1,6 @@
 import { MonitorPlay, UserRoundCheck, Cpu, IndianRupee } from 'lucide-react';
 import { pillars } from '../data/site.js';
+import SectionHead from './SectionHead.jsx';
 
 // Duotone line icons: black stroke with a crimson accent badge.
 const icons = [MonitorPlay, UserRoundCheck, Cpu, IndianRupee];
@@ -10,10 +11,7 @@ export default function Pillars() {
   return (
     <section className="section pillars-sec">
       <div className="container">
-        <div className="section-head" data-reveal>
-          <h2>Not Just Another <span className="u-draw">‘Course’</span></h2>
-          <p>Built for people who want careers, not certificates.</p>
-        </div>
+        <SectionHead k="pillars" />
         <div className="pillars">
           {pillars.map((p, i) => {
             const Icon = icons[i];

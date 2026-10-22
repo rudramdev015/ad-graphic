@@ -24,7 +24,7 @@ export default function Logo({ variant = 'dark' }) {
   return (
     <span className={`logo logo--${variant}`}>
       {hasImage ? (
-        <img src="/logo.png" alt="" width="42" height="42" className="logo-img" onError={() => setHasImage(false)} />
+        <img src={brand.logo || "/logo.png"} alt="" width="42" height="42" className="logo-img" onError={() => setHasImage(false)} />
       ) : (
         <Mark size={42} />
       )}

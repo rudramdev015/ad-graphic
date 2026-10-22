@@ -5,3 +5,6 @@ server/data/applications.json
 server/uploads
 server/data/testimonials.json
 server/data/.admin-secret
+client/src/iamges.placement/
+.vercel
+.env*.local

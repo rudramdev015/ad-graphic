@@ -1,5 +1,6 @@
 import { MonitorPlay, School } from 'lucide-react';
 import { brand, comparison } from '../data/site.js';
+import SectionHead from './SectionHead.jsx';
 import { Mark } from './Logo.jsx';
 
 // Rows = options, columns = criteria. Our academy is highlighted on top.
@@ -17,10 +18,7 @@ export default function Comparison() {
     <section className="section cmp-sec" id="compare">
       <div className="cmp-grid-bg" aria-hidden="true" />
       <div className="container">
-        <div className="section-head" data-reveal>
-          <h2>Compare Your <span className="u-draw">Options</span></h2>
-          <p>See why students choose a studio over a screen or a classroom.</p>
-        </div>
+        <SectionHead k="compare" />
 
         <div className="cmp-scroll" data-reveal>
           <div className="cmp" role="table" aria-label="Comparison of learning options" style={{ '--cols': criteria.length }}>

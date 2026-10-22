@@ -1,5 +1,5 @@
 import { ArrowRight, Instagram, MapPin, Phone, Mail } from 'lucide-react';
-import { brand, nav } from '../data/site.js';
+import { brand, nav, labels, sections, fill } from '../data/site.js';
 import Logo from './Logo.jsx';
 
 const WhatsAppIcon = (props) => (
@@ -25,11 +25,11 @@ export default function Footer({ onApply }) {
             {Array.from({ length: 14 }, (_, i) => <i key={i} style={{ '--r': i }} />)}
           </div>
           <div className="ft-cta-copy">
-            <h2>Seats Are Filling Fast</h2>
-            <p>Start your creative career today.</p>
+            <h2>{fill(sections.footer.ctaTitle)}</h2>
+            <p>{fill(sections.footer.ctaText)}</p>
           </div>
           <button className="ft-cta-btn" onClick={onApply}>
-            Pre-Register for {brand.batch} <ArrowRight size={22} />
+            {labels().cta} <ArrowRight size={22} />
           </button>
         </div>
       </div>

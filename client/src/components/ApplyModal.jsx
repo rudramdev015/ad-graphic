@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { X, CheckCircle2, Loader2 } from 'lucide-react';
-import { brand } from '../data/site.js';
+import { brand, labels, admissions } from '../data/site.js';
 
 const empty = { name: '', email: '', phone: '', city: '', course: 'Design + Video (full program)', experience: '', goal: '' };
 
@@ -71,14 +71,14 @@ export default function ApplyModal({ open, onClose }) {
         {state === 'done' ? (
           <div className="modal-success">
             <CheckCircle2 size={56} />
-            <h3>You are pre-registered! 🎉</h3>
-            <p>Thanks for pre-registering for {brand.batch}. Our team will call or WhatsApp you within 48 hours with the next steps.</p>
+            <h3>{labels().done}</h3>
+            <p>Thanks! {admissions.successMessage}</p>
             <button className="btn btn-primary" onClick={close}>Done</button>
           </div>
         ) : (
           <form onSubmit={submit} noValidate>
             <span className="eyebrow">{brand.batch} · {brand.seats} seats</span>
-            <h3 id="apply-title">Pre-Register for {brand.batch}</h3>
+            <h3 id="apply-title">{labels().title}</h3>
             <p className="modal-sub">Takes 60 seconds. No prior experience required — no payment now.</p>
 
             <div className="form-grid">
@@ -119,7 +119,7 @@ export default function ApplyModal({ open, onClose }) {
             {state === 'error' && message && <p className="form-error">{message}</p>}
 
             <button className="btn btn-primary btn-lg btn-block" disabled={state === 'sending'}>
-              {state === 'sending' ? <><Loader2 size={18} className="spin" /> Submitting…</> : 'Pre-Register Now'}
+              {state === 'sending' ? <><Loader2 size={18} className="spin" /> Submitting…</> : labels().submit}
             </button>
           </form>
         )}
