@@ -114,7 +114,14 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .nav-inner { display: flex; align-items: center; gap: 32px; height: 74px; }
 .nav-logo { margin-right: auto; }
 .logo { display: inline-flex; align-items: center; gap: 10px; }
-.logo-img { width: 42px; height: 42px; border-radius: 10px; object-fit: cover; }
+.mark-img { display: block; flex-shrink: 0; object-fit: contain; border-radius: 22%; }
+.logo-badge {
+  display: inline-grid; flex-shrink: 0; border-radius: 24%;
+  box-shadow: 0 6px 18px -6px rgba(255, 200, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s;
+}
+.logo:hover .logo-badge { transform: rotate(-6deg) scale(1.06); box-shadow: 0 10px 26px -6px rgba(255, 200, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.2); }
+@media (prefers-reduced-motion: reduce) { .logo:hover .logo-badge { transform: none; } }
 .logo-text { display: grid; line-height: 1; }
 .logo-name { font-family: var(--display); font-size: 22px; letter-spacing: 0.03em; }
 .logo-name b { font-weight: 400; color: var(--yellow); }
@@ -830,7 +837,7 @@ h1, h2 { font-family: var(--font); font-weight: 800 !important; text-transform: 
 .ft-main { margin-top: 44px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 80px 0 28px; }
 .ft-center { display: grid; justify-items: center; text-align: center; gap: 22px; }
 .ft-logo .logo { gap: 12px; }
-.ft-logo .logo-img, .ft-logo svg { width: 64px; height: 64px; }
+.ft-logo .mark-img, .ft-logo svg { width: 64px !important; height: 64px !important; }
 .ft-logo .logo-name { font-size: 30px; }
 .ft-about { max-width: 560px; color: var(--muted); font-size: 16px; }
 
