@@ -99,18 +99,33 @@ export const sessionFormat = [
 export const tools = [
   { name: 'Photoshop', abbr: 'Ps', color: '#31a8ff', bg: '#0c1e33' },
   { name: 'Illustrator', abbr: 'Ai', color: '#ff9a00', bg: '#331c00' },
+  { name: 'InDesign', abbr: 'Id', color: '#ff3d8b', bg: '#33091c' },
+  { name: 'Lightroom', abbr: 'Lr', color: '#74c0fc', bg: '#0b2236' },
   { name: 'Premiere Pro', abbr: 'Pr', color: '#9999ff', bg: '#1d1d3d' },
   { name: 'After Effects', abbr: 'Ae', color: '#c8a2ff', bg: '#24133d' },
+  { name: 'Audition', abbr: 'Au', color: '#00e4bb', bg: '#06302a' },
   { name: 'DaVinci Resolve', abbr: 'Dv', color: '#ffcf5c', bg: '#2b2410' },
+  { name: 'CapCut', abbr: 'Cc', color: '#ffffff', bg: '#1a1a1a' },
   { name: 'Figma', abbr: 'Fg', color: '#ff7262', bg: '#331512' },
   { name: 'Canva', abbr: 'Cv', color: '#22d3ee', bg: '#082a30' },
-  { name: 'AI Tools', abbr: 'AI', color: '#ff6b9d', bg: '#331624' },
+  { name: 'Blender', abbr: 'Bl', color: '#f5792a', bg: '#331a08' },
+  { name: 'ChatGPT', abbr: 'GPT', color: '#10a37f', bg: '#062b22', ai: true },
+  { name: 'Midjourney', abbr: 'Mj', color: '#e9e9f0', bg: '#1c1c24', ai: true },
+  { name: 'Adobe Firefly', abbr: 'Ff', color: '#ff5c35', bg: '#33140b', ai: true },
+  { name: 'Runway', abbr: 'Rw', color: '#c4b5fd', bg: '#221a3d', ai: true },
+  { name: 'Leonardo AI', abbr: 'Le', color: '#a78bfa', bg: '#1f1636', ai: true },
+  { name: 'Google Gemini', abbr: 'Gm', color: '#60a5fa', bg: '#0d1f3a', ai: true },
+  { name: 'Claude', abbr: 'Cl', color: '#e08a6d', bg: '#331b12', ai: true },
+  { name: 'ElevenLabs', abbr: '11', color: '#f5f5f5', bg: '#202020', ai: true },
+  { name: 'Kling AI', abbr: 'Kl', color: '#4ade80', bg: '#0c2a17', ai: true },
 ];
 
 export const skills = [
   'Typography', 'Colour Theory', 'Logo Design', 'Brand Identity', 'Social Media Design',
-  'Storytelling', 'Motion Graphics', 'Sound Design', 'Colour Grading', 'Thumbnail Design',
-  'Client Communication', 'Freelancing', 'Pricing & Proposals', 'Personal Branding',
+  'Poster Design', 'Packaging Design', 'Photo Retouching', 'Storytelling', 'Motion Graphics',
+  'Reels & Shorts Editing', 'Sound Design', 'Colour Grading', 'Thumbnail Design',
+  'AI Image Generation', 'Prompt Writing', 'AI Video Editing',
+  'Client Communication', 'Freelancing', 'Pricing & Proposals', 'Portfolio Building', 'Personal Branding',
 ];
 
 // placeholder partner names – replace with your real hiring partners

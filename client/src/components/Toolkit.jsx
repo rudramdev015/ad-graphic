@@ -8,8 +8,12 @@ export default function Toolkit() {
         <SectionHead k="toolkit" accent="serif-accent" />
         <div className="tools">
           {tools.map((t) => (
-            <div className="tool" key={t.name} data-reveal>
-              <span className="tool-icon" style={{ color: t.color, background: t.bg, borderColor: t.color }}>{t.abbr}</span>
+            <div className={`tool ${t.ai ? 'tool--ai' : ''}`} key={t.name} data-reveal>
+              {t.ai && <span className="tool-ai-tag">AI</span>}
+              <span
+                className={`tool-icon ${t.abbr.length > 2 ? 'tool-icon--sm' : ''}`}
+                style={{ color: t.color, background: t.bg, borderColor: t.color, '--glow': t.color }}
+              >{t.abbr}</span>
               <span>{t.name}</span>
             </div>
           ))}
