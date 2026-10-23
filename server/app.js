@@ -9,7 +9,7 @@ import fs from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { mode as storageMode, readDoc, mutateDoc, DATA_DIR, UPLOAD_DIR } from './storage.js';
+import { mode as storageMode, mediaMode, readDoc, mutateDoc, DATA_DIR, UPLOAD_DIR } from './storage.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CLIENT_DIST = path.join(__dirname, '..', 'client', 'dist');
@@ -184,7 +184,7 @@ const getContent = () => readDoc('content', {});
 /* ------------------------------------------------------------------
    Public routes
    ------------------------------------------------------------------ */
-app.get('/api/health', (_req, res) => res.json({ ok: true, storage: storageMode, time: nowIso() }));
+app.get('/api/health', (_req, res) => res.json({ ok: true, storage: storageMode, media: mediaMode, time: nowIso() }));
 
 app.get('/api/content', asyncRoute(async (_req, res) => {
   res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=10, stale-while-revalidate=60');
@@ -483,11 +483,11 @@ const UPLOAD_TYPES = { '.jpg': 'image', '.jpeg': 'image', '.png': 'image', '.web
 const BLOB_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml', 'video/mp4', 'video/webm', 'video/quicktime'];
 
 app.get('/api/admin/upload-config', requireAdmin, (_req, res) => {
-  res.json({ ok: true, mode: storageMode, maxBytes: UPLOAD_LIMIT });
+  res.json({ ok: true, mode: mediaMode, maxBytes: UPLOAD_LIMIT });
 });
 
 app.post('/api/admin/blob-upload', asyncRoute(async (req, res) => {
-  if (storageMode !== 'blob') return res.status(400).json({ ok: false, error: 'Cloud uploads are not enabled.' });
+  if (mediaMode !== 'blob') return res.status(400).json({ ok: false, error: 'Cloud uploads are not enabled.' });
   const { handleUpload } = await import('@vercel/blob/client');
   try {
     const json = await handleUpload({
